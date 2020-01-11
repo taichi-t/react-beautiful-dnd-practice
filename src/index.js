@@ -1,12 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import { DragDropContext } from "react-beautiful-dnd";
+import "@atlaskit/css-reset";
+import initialData from "./initial-data";
+import Column from "./Column";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+class App extends Component {
+  state = initialData;
+  render() {
+    return this.state.columnOrder.map(columnId => {
+      const column = this.state.columns[columnId];
+      const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+      return <Column key={column.id} column={column} tasks={tasks} />;
+    });
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
