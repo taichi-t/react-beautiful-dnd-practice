@@ -117,6 +117,7 @@ class App extends Component {
             const tasks = column.taskIds.map(
               taskId => this.state.tasks[taskId]
             );
+            console.log(this.state.tasks);
 
             // const isDropDisabled = index < this.state.homeIndex;
 
